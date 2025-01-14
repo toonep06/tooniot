@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toon Makkunchon's Portfolio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0ff;
+            --secondary-color: #ff0;
+            --bg-dark: linear-gradient(135deg, #1a1a2e, #16213e);
+            --bg-light: linear-gradient(135deg, #f8f9fa, #e0e0e0);
+            --text-dark: #ffffff;
+            --text-light: #000000;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: var(--bg-light);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        .hero {
+            position: relative;
+            height: 30vh;
+            background: url('https://source.unsplash.com/1600x900/?portfolio,design') center center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            /* เพิ่ม overlay เพื่อทำให้ข้อความโดดเด่นขึ้น */
+            background-color: rgba(0, 0, 0, 0.6);
+            background-blend-mode: overlay;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: slideInRight 1s ease-out;
+        }
+
+        .hero .cta-button {
+            padding: 12px 30px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #ff5722;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero .cta-button:hover {
+            background-color: #e64a19;
+        }
+
+        /* อนิเมชัน */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section-title {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .timeline {
+            margin: 20px 0;
+            padding: 0;
+            list-style: none;
+            position: relative;
+        }
+
+        .milestone {
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .milestone2 {
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .milestone::before {
+            content: '\f058';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .profile-picture {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto;
+            justify-content: center;
+            text-align: center;
+            padding: auto;
+            animation: lightning-flash 2s infinite alternate;
+        }
+
+        .profile-content {
+            margin-top: 10px;
+        }
+
+        .profile-picture {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-picture img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 20px var(--primary-color);
+            animation: glow 1.5s infinite alternate;
+            margin-top: 50px;
+        }
+
+        .lightning {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, transparent 60%, rgba(255, 255, 255, 0.5) 70%, transparent 80%);
+            animation: lightning 0.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 10px var(--primary-color);
+            }
+
+            to {
+                box-shadow: 0 0 20px var(--secondary-color);
+            }
+        }
+
+        @keyframes lightning {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        .card {
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-mode .card {
+            background-color: rgba(26, 26, 46, 0.8);
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #0ff, #00f);
+            color: var(--text-dark);
+            padding: 5px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .theme-toggle,
+        .contact-toggle {
+            position: fixed;
+            z-index: 2;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 3px 8px;
+            background: rgb(122, 85, 224);
+            border-radius: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
+        }
+
+        .contact-toggle3 {
+            position: fixed;
+            z-index: 2;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 3px 8px;
+            background: whitesmoke;
+            border-radius: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
+        }
+
+        .contact-toggle {
+            top: 320px;
+        }
+
+        .contact-toggle3 {
+            top: 420px;
+        }
+
+        .theme-toggle:hover,
+        .contact-toggle:hover {
+            background: var(--secondary-color);
+        }
+
+        .contact-toggle2 {
+            position: fixed;
+            z-index: 2;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 3px 8px;
+            border-radius: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .contact-toggle2 {
+            top: 200px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .project-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-toggle {
+                display: none;
+            }
+
+            .contact-toggle2 {
+                display: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .milestone2 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+        <i class="fas fa-adjust"></i><span id="theme-text">Light Mode</span>
+    </div>
+    <div class="contact-toggle3" title="Contact Me">
+        <a href="https://github.com" target="_blank"><i class="fab fa-github fa-2x" style="color: #181717;"></i></a>
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook fa-2x" style="color: #1877f2;"></i></a>
+        <a href="https://line.me" target="_blank"><i class="fab fa-line fa-2x" style="color: #00c300;"></i></a>
+    </div>
+    <div class="contact-toggle2" title="Contact Me2">
+        <div class="profile-picture">
+            <img src="images\FB_IMG_1513089932851.jpg" alt="Toon Makkunchon" class="rounded-circle">
+            <div class="profile-content">Toon</div>
+        </div>
+    </div>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Toon Makkunchon's Portfolio</h1>
+            <p>A brief history of my work and achievements</p>
+            <a href="#about" class="cta-button">About Me</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- About Section -->
+        <section class="container d-flex justify-content-between align-items-start">
+            <div class="w-75">
+                <ul class="timeline">
+                    <li class="milestone2">
+                        <div class="milestone-content">
+                            <div class="profile-picture">
+                                <img src="images\FB_IMG_1513089932851.jpg" alt="Toon Makkunchon" class="rounded-circle">
+                                <div class="profile-content">Toon</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="milestone">
+                        <div class="milestone-content">
+                            <h4>Founder & IoT Engineer</h4>
+                            <p><a href='https://surfsight.co/' target='_blank'> <img
+                                        src='https://surfsight.co/images/3c1b5461bc0587d72e37a46f03d98cd7.png'
+                                        alt='Surfsight Logo' style='width: 80px; height: 80px; margin-left: 5px;'></a> |
+                                2021 - Present</p>
+                        </div>
+                    </li>
+                    <li class="milestone">
+                        <div class="milestone-content">
+                            <h4>R&D Mechanics & Software Manager</h4>
+                            <p>Private Company | 2018 - Present</p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="row">
+                <!-- Project 1 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\pg.webp" alt="Project Management System" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">Project Management</h5>
+                            <p class="card-text">>Professional Project Management Services</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\website.webp" alt="Personal Website" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">Web Applications Development</h5>
+                            <p class="card-text">Developed various web applications using modern technologies</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\cpu.webp" alt="ESP32 Development" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">Embedded Systems Development</h5>
+                            <p class="card-text">Specializing in optimizing functions and mastering FreeRTOS with
+                                PlatformIO for advanced embedded systems.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\pcb.webp" alt="PCB Design" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">PCB and Circuit Design</h5>
+                            <p class="card-text">Designed PCBs and electronic circuits for various microcontroller-based
+                                projects.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 5 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\machine.webp" alt="Machine Control" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">Machine Control Programming</h5>
+                            <p class="card-text">Developed control software for industrial machines.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 6 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\cash.webp" alt="Payment Systems" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">Cash Payment Systems</h5>
+                            <p class="card-text">Implemented cash payment systems for various applications.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 7 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\smart.webp" alt="Smart Building" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">Smart Building Systems</h5>
+                            <p class="card-text">Developed smart building systems for automation and energy efficiency.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 8 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\cafe.webp" alt="Cafe Robot" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">Cafe Robot</h5>
+                            <p class="card-text">Designed and developed a robot system for cafes to automate services.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 9 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\iot.webp" alt="IoT Solutions" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">IoT Solutions and Digital Transformation</h5>
+                            <p class="card-text">Built and deployed various IoT solutions and digital transformation
+                                projects.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 10 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\auto.webp" alt="Auto Test Machine" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">Auto Test Machine</h5>
+                            <p class="card-text">Designed and developed automated test machines with detailed reporting
+                                capabilities.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 11 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\server.webp" alt="Server Setup" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">Server Setup</h5>
+                            <p class="card-text">Configured and deployed server infrastructure for various applications.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 12 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="images\protocol.webp" alt="Protocol Decoding" class="project-img">
+                        <div class="card-body">
+                            <h5 class="card-title">Protocol Decoding</h5>
+                            <p class="card-text">Decoded machine protocols and integrated them with control systems.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Projects Omitted for Brevity -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Toon Makkunchon. All rights reserved.</p>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const themeText = document.getElementById('theme-text');
+            if (document.body.classList.contains('dark-mode')) {
+                themeText.textContent = 'Dark Mode';
+            } else {
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+    </script>
+</body>
+
+</html>
